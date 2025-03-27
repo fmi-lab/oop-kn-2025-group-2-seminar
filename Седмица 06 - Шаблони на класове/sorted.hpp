@@ -2,6 +2,7 @@
 #define SORTED_HPP
 
 #include <cstddef>
+#include <functional>
 #include <ostream>
 #include <string>
 #include <variant>
@@ -25,6 +26,9 @@ public:
 
   const T& operator[](std::size_t index) const;
   T& operator[](std::size_t index);
+
+  template <typename U>
+  Sorted<U> map(const std::function<U(const T&)>&) const;
 
 private:
   T* data;
@@ -137,6 +141,18 @@ const T& Sorted<T>::operator[](std::size_t index) const {
 template <typename T>
 T& Sorted<T>::operator[](std::size_t index) {
   return data[index];
+}
+
+template <typename T>
+template <typename U>
+Sorted<U> Sorted<T>::map(const std::function<U(const T&)>& f) const {
+  Sorted<U> result;
+
+  for (std::size_t i = 0; i < size; ++i) {
+    result.add(f(data[i]));
+  }
+
+  return result;
 }
 
 #endif
