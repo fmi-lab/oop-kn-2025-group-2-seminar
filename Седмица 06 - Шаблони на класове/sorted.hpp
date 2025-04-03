@@ -30,6 +30,10 @@ public:
   template <typename U>
   Sorted<U> map(const std::function<U(const T&)>&) const;
 
+  std::size_t length() const noexcept {
+    return size;
+  }
+
 private:
   T* data;
   std::size_t size, capacity;
