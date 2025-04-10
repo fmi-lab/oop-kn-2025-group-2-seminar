@@ -9,6 +9,9 @@ public:
     car2 = new Car(car1);
   }
 
+  CarFixture(const CarFixture&) = delete;
+  CarFixture& operator=(const CarFixture&) = delete; 
+
   ~CarFixture() {
     delete car2;
   }
