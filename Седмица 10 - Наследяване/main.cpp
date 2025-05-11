@@ -24,7 +24,7 @@ public:
     strcpy(email, other.email);
   }
 
-  ~Person() {
+  virtual ~Person() {
     delete [] name;
     delete [] email;
   }
@@ -44,7 +44,7 @@ public:
 
   void send_mail(const char* message) const {
     std::ofstream inbox(email, std::ios::app);
-    greet(inbox) << '\n' << message << '\n';
+    this->greet(inbox) << '\n' << message << '\n';
     inbox.close();
   }
 
@@ -74,7 +74,7 @@ protected:
     swap(age, other.age);
   }
 
-  std::ostream& greet(std::ostream& os) const {
+  virtual std::ostream& greet(std::ostream& os) const {
     return os << "To: " << name;
   }
 };
@@ -120,8 +120,7 @@ private:
     swap(fn, other.fn);
   }
 
-  // IMPROTANT: does not work
-  std::ostream& greet(std::ostream& os) const {
+  std::ostream& greet(std::ostream& os) const final {
     return Person::greet(os) << ", " << fn;
   }
 };
