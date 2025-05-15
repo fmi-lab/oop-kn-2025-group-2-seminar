@@ -13,7 +13,7 @@ class MathExpression : public Cloneable {
 public:
   virtual double evaluate() const = 0;
   virtual void print() const noexcept = 0;
-  virtual MathExpression *clone() const = 0;
+  virtual MathExpression *clone() const override = 0;
   virtual ~MathExpression() = default;
 };
 
