@@ -1,6 +1,7 @@
 #include "student.hpp"
 #include <cstring>
 #include <iostream>
+#include <utility>
 
 Student::Student(
   const char* name, 
@@ -44,6 +45,20 @@ Student& Student::operator=(const Student& other) {
   Student copy(other);
   swap(copy);
 
+  return *this;
+}
+
+Student::Student(Student&& other)
+  : name(std::exchange(other.name, nullptr)),
+    year(std::move(other.year)),
+    group(std::move(other.group)),
+    fn(std::move(other.fn)),
+    average_grade(std::move(other.average_grade)) {}
+
+Student& Student::operator=(Student&& other) {
+  Student copy(std::move(other));
+  swap(copy);
+  
   return *this;
 }
 

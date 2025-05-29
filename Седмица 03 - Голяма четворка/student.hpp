@@ -15,6 +15,8 @@ public:
 
   Student(const Student& other);
   Student& operator=(const Student& other);
+  Student(Student&& other);
+  Student& operator=(Student&& other);
   ~Student() {
     delete [] name;
   }
